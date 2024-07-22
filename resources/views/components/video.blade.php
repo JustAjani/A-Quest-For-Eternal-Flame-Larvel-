@@ -24,7 +24,6 @@
             box-shadow: 0 4px 6px rgba(62, 0, 0, 0.5); 
             background-color: #ba0000; 
             margin: auto; 
-            /* margin-top: -600px; */
             display: flex;
             align-items: center; 
             justify-content: center; 

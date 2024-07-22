@@ -22,7 +22,7 @@
         }
 
         #cardContainer {
-            margin-top: 300px;
+            margin-top: 320px;
             display: flex;
             flex-wrap: wrap;
             justify-content: space-around;

@@ -9,31 +9,10 @@
             font-family: 'rpg_font';
             src: url('rpg.ttf'); /* Corrected the file name, make sure it matches your file */
         }
-        *{
-            margin: 0;
-            padding: 0;
-        }
-
-        body{
-            height: 100%;
-            background-color: #f2f2f2; /* Background color adjusted for visibility */
-        }
-
-        .video-background {
-            position: absolute; /* Covering the whole screen */
-            bottom: 0; /* Start from the top */
-            left: 0; /* Start from the left */
-            min-width: 100%;
-            min-height: 100vh;
-            /* width: auto;
-            height: auto; */
-            z-index: -100; /* Behind everything */
-            overflow: hidden;
-        }
 
         .text-container {
             position: absolute ; 
-            top: 85%; /* Position it 10% from the top */
+            top: 90vh; /* Position it 10% from the top */
             left: 10%; /* 5% from the left */
             width: 80%; /* 90% of its container width */
             background: rgba(62, 0, 0, 0.8); /* Dark red with opacity */
@@ -59,13 +38,7 @@
 <body>
     <x-nav></x-nav> 
     <x-video></x-video>
-    
-    <div class="video-background">
-        <video autoplay muted loop style="width:100%; height: 100%;" id="bgVideo">
-            <source src="{{ asset('video/fire_sparks_with_smoke_2.mp4') }}" type="video/mp4">
-        </video>
-    </div>
-
+    <x-background></x-background>
     <div class="text-container">
        <h2>A Quest For Eternal Flame</h2>
        <p>

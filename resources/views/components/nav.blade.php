@@ -9,6 +9,7 @@
     <style>
         body {
             background-color: #f2f2f2; /* Light gray background for contrast */
+            height: 100px !important;
         }
         .icon-link:hover {
             transform: scale(1.3); /* Larger zoom effect on hover */
