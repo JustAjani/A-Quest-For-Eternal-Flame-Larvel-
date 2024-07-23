@@ -20,17 +20,18 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adds shadow to the header */
             border-bottom-right-radius: 10px; /* Rounded bottom right corner */
             border-bottom-left-radius: 10px; /* Rounded bottom left corner */
-            background-color: #000000; /* Solid black for the dashboard */
+            background-color: transparent; /* Solid black for the dashboard */
             color: #ffffff; /* Change text color to white for visibility */
         }
         .icon-link {
             color: #ba0000; /* Darker red for normal state */
         }
         nav {
-            background-color: #3e0000; /* Dark red for the navigation bar */
+            background-color: transparent; /* Dark red for the navigation bar */
         }
         .search-container {
-            background-color: #7c0000; /* Medium dark red for search bar */
+            background-color: transparent; /* Medium dark red for search bar */
+            border: 2px solid #7c0000;
             backdrop-filter: blur(8px); /* Blur effect for search bar */
             border-radius: 10px; /* Rounded corners for search bar */
             flex-grow: 1; /* Makes the search bar container grow */

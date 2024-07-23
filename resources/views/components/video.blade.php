@@ -1,10 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video Player</title>
-    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @font-face {
         font-family: 'rpg_font';
@@ -20,8 +13,8 @@
             width: 80%; 
             height: 400px; 
             border-radius: 10px; 
-            border: 1px solid #7c0000; 
-            box-shadow: 0 4px 6px rgba(62, 0, 0, 0.5); 
+            /* border: 1px solid #7c0000; 
+            box-shadow: 0 4px 6px rgba(62, 0, 0, 0.5);  */
             background-color: #ba0000; 
             margin: auto; 
             display: flex;
@@ -36,19 +29,10 @@
             height: 100%;
             object-fit: cover;
         }
-        .video-title {
-            position: absolute;
-            z-index: 10;
-            font-family: 'rpg_font';
-            color: #7c0000; 
-            font-size: 50px; 
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.6); 
-        }
     </style>
 </head>
 <body class="bg-gray-100 p-4">
     <div class="video-container">
-        <span class="video-title">Quest For Eternal Flame</span>
         <video id="videoPlayer" autoplay muted></video>
     </div>
 
@@ -75,5 +59,4 @@
             videoPlayer.play(); // Play the next video
         }
     </script>
-</body>
-</html>
+

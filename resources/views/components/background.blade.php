@@ -1,9 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
     <style>
         * {
             margin: 0;
@@ -14,6 +8,7 @@
         body, html {
             height: 100%; /* Ensures the body takes full viewport height */
             width: 100%; /* Ensures the body takes full viewport width */
+            font-family: 'rpg_font';
         }
 
         body {
@@ -45,12 +40,8 @@
             color: white; /* For contrast against the likely dark video */
         }
     </style>
-</head>
-<body>
     <div class="video-background">
         <video autoplay muted loop>
             <source src="{{ asset('video/fire_sparks_with_smoke_2.mp4') }}" type="video/mp4">
         </video>
     </div>
-</body>
-</html>
