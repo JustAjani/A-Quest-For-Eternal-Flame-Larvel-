@@ -70,16 +70,28 @@
     </nav>
 
     <header class="shadow">
-        <div class="mx-auto max-w-7xl px-4 py-2 sm:px-6 lg:px-8 text-center">
-            <div class="inline-block mt-2 space-x-4">
-                <a href="/" class="icon-link {{ request()->is('/') ? 'active-link' : '' }}"><i class="fas fa-home"></i></a>
-                <a href="/Market Place" class="icon-link {{ request()->is('Market Place') ? 'active-link' : '' }}"><i class="fas fa-store"></i></a>
-                <a href="/New Player Guide" class="icon-link {{ request()->is('New Player Guide') ? 'active-link' : '' }}"><i class="fas fa-info-circle"></i></a>
-                <a href="/Play" class="icon-link {{ request()->is('Play') ? 'active-link' : '' }}"><i class="fas fa-play"></i></a>
-                <a href="/Contacts" class="icon-link {{ request()->is('Contacts') ? 'active-link' : '' }}"><i class="fas fa-envelope"></i></a>
-                <a href="/User" class="icon-link {{ request()->is('User') ? 'active-link' : '' }}"><i class="fas fa-user"></i></a>
-            </div>
+    <div class="mx-auto max-w-7xl px-4 py-2 sm:px-6 lg:px-8 text-center">
+        <div class="inline-block mt-2 space-x-4">
+            <a href="/" class="icon-link {{ request()->is('/') ? 'active-link' : '' }}"><i class="fas fa-home"></i></a>
+            <a href="/Market Place" class="icon-link {{ request()->is('Market Place') ? 'active-link' : '' }}"><i class="fas fa-store"></i></a>
+            <a href="/New Player Guide" class="icon-link {{ request()->is('New Player Guide') ? 'active-link' : '' }}"><i class="fas fa-info-circle"></i></a>
+            <a href="/Play" class="icon-link {{ request()->is('Play') ? 'active-link' : '' }}"><i class="fas fa-play"></i></a>
+            <a href="/Contacts" class="icon-link {{ request()->is('Contacts') ? 'active-link' : '' }}"><i class="fas fa-envelope"></i></a>
+
+            <!-- Check if user is logged in -->
+            @if(Auth::check())
+                <!-- User is logged in - Show logout link -->
+                <a href="/logout" class="icon-link {{ request()->is('logout') ? 'active-link' : '' }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fas fa-sign-out-alt"></i></a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            @else
+                <!-- User is not logged in - Show register link -->
+                <a href="/register" class="icon-link {{ request()->is('register') ? 'active-link' : '' }}"><i class="fas fa-user-plus"></i></a>
+            @endif
         </div>
+    </div>
+</header>
     </header>
     <main>
         <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
