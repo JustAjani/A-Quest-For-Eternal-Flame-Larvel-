@@ -29,4 +29,5 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/Market Place', [MerchController::class, 'index']) ->name('Market Place');
+Route::get('/Market Place/{id}', [MerchController::class, 'show'])->name('Details');
 

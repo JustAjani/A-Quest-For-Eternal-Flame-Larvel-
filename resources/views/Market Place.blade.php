@@ -57,7 +57,6 @@
         }
 
         .card {
-            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
             transition: 0.3s;
             width: 100%;
             max-width: 220px; /* Make the cards smaller */
@@ -155,6 +154,7 @@
                             <img src="{{ asset($item->image) }}" alt="Books" class="item-images">
                             <h4><b>{{ $item->title }}</b></h4>
                             <p>{{ $item->price }}</p>
+                            <a href="/Market Place/{{ $item->id }}">View Details</a>
                         </div>
                     </div>
                 @endif
@@ -174,6 +174,7 @@
                             <img src="{{ asset($item->image) }}" alt="Posters" class="item-images">
                             <h4><b>{{ $item->title }}</b></h4>
                             <p>{{ $item->price }}</p>
+                            <a href="/Market Place/{{ $item->id }}">View Details</a>
                         </div>
                     </div>
                 @endif
@@ -193,6 +194,7 @@
                             <img src="{{ asset($item->image) }}" alt="Shirts" class="item-images">
                             <h4><b>{{ $item->title }}</b></h4>
                             <p>{{ $item->price }}</p>
+                            <a href="/Market Place/{{ $item->id }}">View Details</a>
                         </div>
                     </div>
                 @endif
@@ -212,6 +214,7 @@
                             <img src="{{ asset($item->image) }}" alt="Accessories" class="item-images">
                             <h4><b>{{ $item->title }}</b></h4>
                             <p>{{ $item->price }}</p>
+                            <a href="/Market Place/{{ $item->id }}">View Details</a>
                         </div>
                     </div>
                 @endif
