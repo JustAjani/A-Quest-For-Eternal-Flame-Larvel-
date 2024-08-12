@@ -148,103 +148,77 @@
         <h2>Books</h2>
         <p class="text-container">Explore a collection of enchanting books that dive deep into the lore and adventures of Aethoria. Each book offers a unique journey, unraveling the mysteries and stories of this fantastical world.</p>
         <div class="item-container">
-            <?php
-                $books = [
-                    ["Image" => "images/Book1.webp", "title" => "A Beginner's Guide", "price" => "$12.99"],
-                    ["Image" => "images/Book2.webp", "title" => "A.Q.F.E Book1", "price" => "$15.99"],
-                    ["Image" => "images/Book3.webp", "title" => "A.Q.F.E: Aethoria Chronicles", "price" => "$10.99"],
-                ];
-
-                foreach ($books as $index => $book) {
-                    echo '<div class="card">
-                            <div class="container">
-                                <img src="' . $book["Image"] . '" alt="Books" class="item-images">
-                                <h4><b>' . $book["title"] . '</b></h4>
-                                <p>' . $book["price"] . '</p>
-                            </div>
-                        </div>';
-                }
-            ?>
+            @foreach($merch as $item)
+                @if($item->type === 'book')
+                    <div class="card">
+                        <div class="container">
+                            <img src="{{ asset($item->image) }}" alt="Books" class="item-images">
+                            <h4><b>{{ $item->title }}</b></h4>
+                            <p>{{ $item->price }}</p>
+                        </div>
+                    </div>
+                @endif
+            @endforeach
         </div>
     </div>
+
 
     <div class="section">
         <h2>Posters</h2>
         <p class="text-container">Decorate your space with stunning posters inspired by 'A Quest for Eternal Flame'. Each poster captures a moment or element from the game, bringing the magic and adventure of Aethoria to your walls.</p>
         <div class="item-container">
-            <?php
-                $posters = [
-                    ["Image" => "images/Poster1.webp", "title" => "Choose thy path", "price" => "$10.99"],
-                    ["Image" => "images/Poster2.webp", "title" => "Choose thy path2", "price" => "$12.99"],
-                    ["Image" => "images/Poster3.webp", "title" => "Choose thy path3", "price" => "$11.99"],
-                    ["Image" => "images/Poster4.webp", "title" => "Home Sweet Home", "price" => "$14.99"],
-                    ["Image" => "images/Poster5.webp", "title" => "Phosphorescent Beauty", "price" => "$11.99"],
-                    ["Image" => "images/Poster6.webp", "title" => "Dear Diary", "price" => "$11.99"],
-                    ["Image" => "images/Poster7.webp", "title" => "Knight of the Fallen Star", "price" => "$14.99"],
-                ];
-
-                foreach ($posters as $index => $poster) {
-                    echo '<div class="card">
-                            <div class="container">
-                                <img src="' . $poster["Image"] . '" alt="Posters" class="item-images">
-                                <h4><b>' . $poster["title"] . '</b></h4>
-                                <p>' . $poster["price"] . '</p>
-                            </div>
-                        </div>';
-                }
-            ?>
+            @foreach($merch as $item)
+                @if($item->type === 'poster')
+                    <div class="card">
+                        <div class="container">
+                            <img src="{{ asset($item->image) }}" alt="Posters" class="item-images">
+                            <h4><b>{{ $item->title }}</b></h4>
+                            <p>{{ $item->price }}</p>
+                        </div>
+                    </div>
+                @endif
+            @endforeach
         </div>
     </div>
+
 
     <div class="section">
         <h2>Shirts</h2>
         <p class="text-container">Wear your adventure with our exclusive T-shirts inspired by 'A Quest for Eternal Flame'. These shirts feature iconic designs and symbols from the game, perfect for any fan looking to showcase their love for Aethoria.</p>
         <div class="item-container">
-            <?php
-                $shirts = [
-                    ["Image" => "images/Shirt1.webp", "title" => "Ready Dear Traveler? Tee", "price" => "$19.99"],
-                    ["Image" => "images/Shirt2.webp", "title" => "Heart O Flame Tee", "price" => "$21.99"],
-                    ["Image" => "images/Shirt3.webp", "title" => "Phosphorescent Tee", "price" => "$18.99"],
-                    ["Image" => "images/Shirt4.webp", "title" => "Choice Thy Path Tee", "price" => "$18.99"],
-                ];
-
-                foreach ($shirts as $index => $shirt) {
-                    echo '<div class="card">
-                            <div class="container">
-                                <img src="' . $shirt["Image"] . '" alt="Shirts" class="item-images">
-                                <h4><b>' . $shirt["title"] . '</b></h4>
-                                <p>' . $shirt["price"] . '</p>
-                            </div>
-                        </div>';
-                }
-            ?>
+            @foreach($merch as $item)
+                @if($item->type === 'shirt')
+                    <div class="card">
+                        <div class="container">
+                            <img src="{{ asset($item->image) }}" alt="Shirts" class="item-images">
+                            <h4><b>{{ $item->title }}</b></h4>
+                            <p>{{ $item->price }}</p>
+                        </div>
+                    </div>
+                @endif
+            @endforeach
         </div>
     </div>
+
 
     <div class="section">
         <h2>Accessories</h2>
         <p class="text-container">Enhance your style with accessories inspired by the mystical world of 'A Quest for Eternal Flame'. From elegant earrings to powerful pendants, each piece is designed to capture the essence of Aethoria's magic.</p>
         <div class="item-container">
-            <?php
-                $accessories = [
-                    ["Image" => "images/charms1.webp", "title" => "Phosphorescent Bracelet", "price" => "$14.99"],
-                    ["Image" => "images/charms2.webp", "title" => "Phosphorescent Earrings", "price" => "$9.99"],
-                    ["Image" => "images/charms3.webp", "title" => "A.Q.E.F Stickers", "price" => "$7.99"],
-                    ["Image" => "images/charms4.webp", "title" => "Phosphorescent Pendant", "price" => "$7.99"],
-                ];
-
-                foreach ($accessories as $index => $accessory) {
-                    echo '<div class="card">
-                            <div class="container">
-                                <img src="' . $accessory["Image"] . '" alt="Accessories" class="item-images">
-                                <h4><b>' . $accessory["title"] . '</b></h4>
-                                <p>' . $accessory["price"] . '</p>
-                            </div>
-                        </div>';
-                }
-            ?>
+            @foreach($merch as $item)
+                @if($item->type === 'accessory')
+                    <div class="card">
+                        <div class="container">
+                            <img src="{{ asset($item->image) }}" alt="Accessories" class="item-images">
+                            <h4><b>{{ $item->title }}</b></h4>
+                            <p>{{ $item->price }}</p>
+                        </div>
+                    </div>
+                @endif
+            @endforeach
         </div>
     </div>
+
 
     <script>
         let slideIndex = 0;
