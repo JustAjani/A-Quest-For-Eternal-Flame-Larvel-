@@ -11,7 +11,7 @@ class GuestMiddleware
     {
         if (Auth::check()) {
             // Redirect to a specified route if the user is authenticated
-            return redirect('/register'); // Change '/home' to your desired route
+            return redirect('/Home'); 
         }
 
         return $next($request);

@@ -153,7 +153,7 @@
                         <div class="container">
                             <img src="{{ asset($item->image) }}" alt="Books" class="item-images">
                             <h4><b>{{ $item->title }}</b></h4>
-                            <p>{{ $item->price }}</p>
+                            <p>${{ $item->price }}</p>
                             <a href="/Market Place/{{ $item->id }}">View Details</a>
                         </div>
                     </div>
@@ -173,7 +173,7 @@
                         <div class="container">
                             <img src="{{ asset($item->image) }}" alt="Posters" class="item-images">
                             <h4><b>{{ $item->title }}</b></h4>
-                            <p>{{ $item->price }}</p>
+                            <p>${{ $item->price }}</p>
                             <a href="/Market Place/{{ $item->id }}">View Details</a>
                         </div>
                     </div>
@@ -193,7 +193,7 @@
                         <div class="container">
                             <img src="{{ asset($item->image) }}" alt="Shirts" class="item-images">
                             <h4><b>{{ $item->title }}</b></h4>
-                            <p>{{ $item->price }}</p>
+                            <p>${{ $item->price }}</p>
                             <a href="/Market Place/{{ $item->id }}">View Details</a>
                         </div>
                     </div>
@@ -213,7 +213,7 @@
                         <div class="container">
                             <img src="{{ asset($item->image) }}" alt="Accessories" class="item-images">
                             <h4><b>{{ $item->title }}</b></h4>
-                            <p>{{ $item->price }}</p>
+                            <p>${{ $item->price }}</p>
                             <a href="/Market Place/{{ $item->id }}">View Details</a>
                         </div>
                     </div>

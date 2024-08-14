@@ -2,8 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $item->title }} - Product Details</title>
+    <script src="https://js.stripe.com/v3/"></script>
     <style>
         @font-face {
             font-family: 'rpg_font';
@@ -54,7 +56,7 @@
             color: #fff;
         }
 
-        #button {
+        #button, #checkout-button{
             width: auto;
             padding: 10px 20px;
             border: none;
@@ -65,7 +67,7 @@
             transition: background-color 0.3s;
         }
 
-        #button:hover {
+        #button:hover, #checkout-button:hover {
             background-color: #0056b3;
         }
 
@@ -110,8 +112,13 @@
         <div class="details-section">
             <h1>{{ $item->title }}</h1>
             <p>{{ $item->description }}</p>
-            <p class="price">{{ $item->price }}</p>
-            <button id ="button">Add to Cart</button>
+            <p class="price">${{ number_format($item->price) }}</p> 
+            <form action="{{'/create-checkout-session'}}" method="POST">
+            @csrf
+            <button id="checkout-button">Pay with Stripe</button>
+            </form>
+            <button id="button">Add to Cart</button>
+            
         </div>
     </div>
 
@@ -129,6 +136,28 @@
             if (currentImageIndex < 0) currentImageIndex = images.length - 1;
             document.getElementById('mainImage').src = images[currentImageIndex];
         }
+
+        var stripe = Stripe("{{ env('STRIPE_KEY') }}");
+        var checkoutButton = document.getElementById('checkout-button');
+
+        checkoutButton.addEventListener('click', function () {
+            fetch('/create-checkout-session', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+                body: JSON.stringify({
+                    itemId: '{{ $item->id }}'
+                })
+            }).then(function (response) {
+                return response.json();
+            }).then(function (session) {
+                return stripe.redirectToCheckout({ sessionId: session.id });
+            }).catch(function (error) {
+                console.error('Error:', error);
+                alert('Error processing payment');
+            });
+        });
     </script>
-</body>
 </html>
