@@ -116,41 +116,38 @@
 
         // Fetch messages from the server
         $.get("{{ url('/messages') }}", function(data) {
-            data.forEach(message => {
-                const messageHtml = `<li>${message.message}</li>`;
+            data.forEach(function(message) {
+                const messageHtml = `<li><strong>${message.user.name}:</strong> ${message.message}</li>`;
                 $('#messages').append(messageHtml);
             });
         });
 
-        // Bind a function to the MessageSent event
-        channel.bind('message.sent', function(data) {
-            const messageHtml = `<li>${data.message}</li>`;
+        // Listen for new messages
+        channel.bind('MessageSent', function(data) {
+            const messageHtml = `<li><strong>${data.message.user.name}:</strong> ${data.message.message}</li>`;
             $('#messages').append(messageHtml);
-            // alert(data.message);
         });
 
-        // Handle sending messages
         $('#send-message').on('click', function() {
-            const message = $('#message-input').val();
+        const message = $('#message-input').val();
+        if (message.trim() !== '') {
+            $.ajax({
+                url: "{{ url('/send-message') }}",
+                method: 'POST',  // Make sure this is POST
+                data: {
+                    message: message,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    $('#message-input').val(''); // Clear the input after send
+                },
+                error: function(xhr) {
+                    console.error('Error sending message:', xhr);
+                }
+            });
+        }
+    });
 
-            if (message.trim() !== '') {
-                $.ajax({
-                    url: "{{ url('/send-message') }}",
-                    method: 'POST',
-                    data: {
-                        message: message,
-                        _token: '{{ csrf_token() }}'
-                    },
-                    success: function() {
-                        $('#message-input').val(''); // Clear the input
-                    },
-                    error: function(error) {
-                        console.error('Error sending message:', error);
-                    }
-                });
-            }
-        });
-        
     </script>
 </body>
 </html>

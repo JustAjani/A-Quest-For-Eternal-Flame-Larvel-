@@ -5,24 +5,33 @@ namespace App\Http\Controllers;
 use App\Events\MessageSent;
 use App\Models\Message;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class ChatController extends Controller
-{
+{   
     public function sendMessage(Request $request)
     {
-        // Validate and store the message
-        $message = Message::create([
-            'message' => $request->message,
-        ]);
+        {
+            $user = Auth::user();  // Ensure the user is authenticated
 
-        // Broadcast the message event
-        event(new MessageSent($message->message));
+            $message = new Message([
+                'message' => $request->message,
+                'user_id' => $user->id  // Ensure user_id is correctly assigned
+            ]);
 
-        return response()->json(['status' => 'Message sent!']);
+            $message->save();  // Attempt to save the message
+
+            broadcast(new MessageSent($message))->toOthers();
+
+            return response()->json(['status' => 'Message sent successfully', 'message' => $message]);
+
+        } 
     }
 
     public function fetchMessages()
     {
-        return Message::all();
+        return Message::with('user')->get();
     }
+
 }
