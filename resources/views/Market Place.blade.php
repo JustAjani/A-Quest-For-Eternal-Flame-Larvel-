@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Marketplace</title>
+    <script src="{{ asset('js/animation.js') }}"></script>
     <style>
         @font-face {
             font-family: 'rpg_font';
@@ -69,9 +70,10 @@
             text-align: center;
         }
 
-        .card:hover {
-            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-            background-color: #ba0000;
+        .card {
+            transition: transform 0.3s, opacity 0.3s; /* Smooth transitions for the transform and opacity */
+            will-change: transform, opacity; /* Optimize for animations */
+            opacity: 0; /* Start with cards hidden */
         }
 
         .container {
@@ -124,6 +126,14 @@
             cursor: pointer;
             border-radius: 5px;
         }
+
+        h2, .text-container, .card, .slider {
+            transition: transform 0.3s, opacity 0.3s; /* Smooth transitions for the transform and opacity */
+            will-change: transform, opacity; /* Optimize for animations */
+            opacity: 0; /* Start hidden */
+            transform: translateY(50px); /* Start slightly lowered */
+        }
+
     </style>
 </head>
 <body>
@@ -221,8 +231,8 @@
             @endforeach
         </div>
     </div>
-
-
+    
+    
     <script>
         let slideIndex = 0;
         const slides = document.querySelector('.slides');

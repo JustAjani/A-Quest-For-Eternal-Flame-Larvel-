@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A Quest For Eternal Flame</title>
+    <script src="{{ asset('js/animation.js') }}"></script>
     <style>
         @font-face {
             font-family: 'rpg_font';
