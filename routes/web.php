@@ -37,5 +37,7 @@ Route::get('/Contacts', function () {
 
 Route::post('/send-message', [ChatController::class, 'sendMessage']);
 Route::get('/messages', [ChatController::class, 'fetchMessages']);
+Route::post('/delete-message/{id}', [ChatController::class, 'deleteMessage']);
+
 
 

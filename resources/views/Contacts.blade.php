@@ -18,13 +18,13 @@
         font-family: 'rpg_font', Arial, sans-serif;
         margin: 0;
         padding: 20px;
-        background-color: #0f0f0f; /* Dark background for a chat app */
-        color: #ba0000; /* White text for better readability */
+        background-color: #0f0f0f; 
+        color: #ba0000; 
     }
 
     h1 {
         text-align: center;
-        font-size: 40px!important;
+        font-size: 40px !important;
     }
 
     #chat-app {
@@ -39,20 +39,33 @@
     #messages {
         list-style: none;
         padding: 0;
-        max-height: 300px; /* Adjust based on your preference */
-        overflow-y: auto; /* Allows scrolling */
+        max-height: 300px;
+        overflow-y: auto;
         margin-bottom: 20px;
     }
 
     #messages li {
         padding: 8px 12px;
         border-radius: 4px;
-        background-color: rgba(255,255,255,0.1); /* Slightly visible message bubbles */
+        background-color: rgba(255,255,255,0.1);
         margin-bottom: 10px;
+        position: relative;
+    }
+
+    .delete-message {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 5px;
+        color: #fff;
+        background-color: #ba0000;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
     }
 
     #message-input {
-        width: calc(100% - 92px); /* Input field width */
+        width: calc(100% - 92px);
         padding: 10px;
         border-radius: 4px;
         border: none;
@@ -61,7 +74,7 @@
 
     #send-message {
         padding: 10px 20px;
-        background-color: #ba0000; /* Red button */
+        background-color: #ba0000;
         border: none;
         border-radius: 4px;
         color: white;
@@ -70,25 +83,8 @@
     }
 
     #send-message:hover {
-        background-color: #0056b3; /* Blue on hover */
+        background-color: #0056b3;
     }
-
-    ::-webkit-scrollbar {
-        width: 8px;
-    }
-
-    ::-webkit-scrollbar-track {
-        background: #f1f1f1;
-    }
-
-    ::-webkit-scrollbar-thumb {
-        background: #888;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-        background: #555;
-    }
-
 </style>
 
 <body>
@@ -105,49 +101,65 @@
 
     <script>
         Pusher.logToConsole = true;
-        // Initialize Pusher
         const pusher = new Pusher("{{ env('PUSHER_APP_KEY') }}", {
             cluster: "{{ env('PUSHER_APP_CLUSTER') }}",
             encrypted: true
         });
 
-        // Subscribe to the chat channel
         const channel = pusher.subscribe('chat');
 
-        // Fetch messages from the server
         $.get("{{ url('/messages') }}", function(data) {
             data.forEach(function(message) {
-                const messageHtml = `<li><strong>${message.user.name}:</strong> ${message.message}</li>`;
+                const messageHtml = `<li id="message-${message.id}"><strong>${message.user.name}:</strong> ${message.message} <button class='delete-message' data-id='${message.id}'>Delete</button></li>`;
                 $('#messages').append(messageHtml);
             });
         });
 
-        // Listen for new messages
-        channel.bind('MessageSent', function(data) {
-            const messageHtml = `<li><strong>${data.message.user.name}:</strong> ${data.message.message}</li>`;
+        channel.bind('message.sent', function(data) {
+            const messageHtml = `<li id="message-${data.message.id}"><strong>${data.message.user.name}:</strong> ${data.message.message} <button class='delete-message' data-id='${data.message.id}'>Delete</button></li>`;
             $('#messages').append(messageHtml);
         });
 
+        channel.bind('message.deleted', function(data) {
+            $(`#message-${data.message.id}`).text('<this message has been deleted>');
+        });
+
         $('#send-message').on('click', function() {
-        const message = $('#message-input').val();
-        if (message.trim() !== '') {
+            const message = $('#message-input').val();
+            if (message.trim() !== '') {
+                $.ajax({
+                    url: "{{ url('/send-message') }}",
+                    method: 'POST',
+                    data: {
+                        message: message,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        $('#message-input').val('');
+                    },
+                    error: function(xhr) {
+                        console.error('Error sending message:', xhr);
+                    }
+                });
+            }
+        });
+
+        $(document).on('click', '.delete-message', function() {
+            const messageId = $(this).data('id');
             $.ajax({
-                url: "{{ url('/send-message') }}",
-                method: 'POST',  // Make sure this is POST
+                url: "{{ url('/delete-message') }}/" + messageId,
+                method: 'POST',
                 data: {
-                    message: message,
                     _token: '{{ csrf_token() }}'
                 },
                 success: function(response) {
-                    $('#message-input').val(''); // Clear the input after send
+                    $(`#message-${messageId}`).text('<this message has been deleted>');
                 },
                 error: function(xhr) {
-                    console.error('Error sending message:', xhr);
+                    console.error('Error deleting message:', xhr);
                 }
             });
-        }
-    });
-
+        });
     </script>
 </body>
 </html>

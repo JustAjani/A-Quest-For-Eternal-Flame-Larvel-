@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\MessageSent;
+use App\Events\MessageDeleted;
 use App\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,17 +22,37 @@ class ChatController extends Controller
             ]);
 
             $message->save();  // Attempt to save the message
-
-            broadcast(new MessageSent($message))->toOthers();
+           
+            event(new MessageSent($message->load("user")));
 
             return response()->json(['status' => 'Message sent successfully', 'message' => $message]);
 
         } 
     }
 
+    public function deleteMessage(Request $request, $id)
+    {
+        $user = Auth::user();
+        $message = Message::where('id', $id)->where('user_id', $user->id)->first();
+
+        if ($message) {
+            $message->update([
+                'message' => '<this message has been deleted>',
+                'is_deleted' => true
+            ]);
+            
+            // Broadcast the deletion event
+            event(new MessageDeleted($message->load("user")));
+
+            return response()->json(['status' => 'Message deleted']);
+        }
+
+        return response()->json(['error' => 'Message not found'], 404);
+    }
+
     public function fetchMessages()
     {
         return Message::with('user')->get();
     }
-
+    
 }
