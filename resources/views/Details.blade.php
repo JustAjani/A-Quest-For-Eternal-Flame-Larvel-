@@ -113,12 +113,14 @@
             <h1>{{ $item->title }}</h1>
             <p>{{ $item->description }}</p>
             <p class="price">${{ number_format($item->price) }}</p> 
-            <form action="{{'/create-checkout-session'}}" method="POST">
+            <!-- <form action="{{'/create-checkout-session'}}" method="POST">
             @csrf
             <button id="checkout-button">Pay with Stripe</button>
-            </form>
-            <button id="button">Add to Cart</button>
-            
+            </form> -->
+            <form action="{{ route('add to cart', $item->id) }}" method="POST">
+            @csrf
+            <button type="submit" id="button" class="btn btn-primary">Add to Cart</button>
+            </form>        
         </div>
     </div>
 
@@ -137,27 +139,30 @@
             document.getElementById('mainImage').src = images[currentImageIndex];
         }
 
-        var stripe = Stripe("{{ env('STRIPE_KEY') }}");
-        var checkoutButton = document.getElementById('checkout-button');
+    //     var stripe = Stripe("{{ env('STRIPE_KEY') }}");
+    //     var checkoutButton = document.getElementById('checkout-button');
 
-        checkoutButton.addEventListener('click', function () {
-            fetch('/create-checkout-session', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                },
-                body: JSON.stringify({
-                    itemId: '{{ $item->id }}'
-                })
-            }).then(function (response) {
-                return response.json();
-            }).then(function (session) {
-                return stripe.redirectToCheckout({ sessionId: session.id });
-            }).catch(function (error) {
-                console.error('Error:', error);
-                alert('Error processing payment');
-            });
-        });
-    </script>
+    //     checkoutButton.addEventListener('click', function (event) {
+    //     event.preventDefault();  // only prevent default if necessary
+    //     console.log('Processing payment...');
+    //     fetch('/create-checkout-session', {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+    //         },
+    //         body: JSON.stringify({
+    //             itemId: '{{ $item->id }}'
+    //         })
+    //     }).then(function (response) {
+    //         return response.json();
+    //     }).then(function (session) {
+    //         console.log('Redirecting to checkout...');
+    //         return stripe.redirectToCheckout({ sessionId: session.id });
+    //     }).catch(function (error) {
+    //         console.error('Error:', error);
+    //         alert('Error processing payment');
+    //     });
+    // });
+        </script>
 </html>

@@ -13,7 +13,7 @@
 
         .text-container {
             position: absolute; 
-            top: 100vh; /* Position it 100% from the top */
+            top: 120vh; /* Position it 100% from the top */
             left: 10%; /* 10% from the left */
             width: 80%; /* 80% of its container width */
             background: transparent;
@@ -35,7 +35,7 @@
 
         .secondary-text-container {
             position: absolute;
-            top: 155vh; /* Position it 70% from the top */
+            top: 150vh; /* Position it 70% from the top */
             left: 50%; /* Center horizontally */
             transform: translateX(-50%); /* Adjust for exact centering */
             width: 80%; /* 80% of its container width */
@@ -53,7 +53,7 @@
 
         .leaderboard {
             position: absolute;
-            top: 340vh; /* Center vertically */
+            top: 325vh; /* Center vertically */
             left: 50%; /* Center horizontally */
             transform: translate(-50%, -50%); /* Adjust for exact centering */
             width: 90%; /* Increase width to 90% */
