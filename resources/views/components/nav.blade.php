@@ -84,6 +84,7 @@
                     <a href="/add to cart" class="icon-link"><i class="fas fa-shopping-cart"></i></a>
                 @endif
                 <a href="/New Player Guide" class="icon-link {{ request()->is('New Player Guide') ? 'active-link' : '' }}"><i class="fas fa-info-circle"></i></a>
+                <a href="/image_form" class="icon-link {{ request()->is('imageGen.image_form') ? 'active-link' : '' }}"><i class="fa-regular fa-image"></i></a>
                 <a href="/external-project" class="icon-link {{ request()->is('Play') ? 'active-link' : '' }}" ><i class="fas fa-play"></i></a>
                 <a href="/Contacts" class="icon-link {{ request()->is('Contacts') ? 'active-link' : '' }}"><i class="fa-solid fa-message"></i></a>
             @endif

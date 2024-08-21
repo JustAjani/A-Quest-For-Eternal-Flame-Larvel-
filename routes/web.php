@@ -5,7 +5,8 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MerchController;
 use App\Http\Controllers\StripePaymentController;
-
+use App\Http\Controllers\ImageGeneratorController;
+use App\Http\Controllers\ChatController;
 
 Route::get('/', function () {
     return view('Home');
@@ -23,6 +24,14 @@ Route::get('/add to cart', function () {
     return view('add to cart');
 });
 
+Route::get('/image_form', function () {
+    return view('imageGen.image_form');
+});
+
+Route::get('/image_result', function () {
+    return view('imageGen.image_result');
+});
+
 Route::get('/register', [RegisterController::class,'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'register']);
 
@@ -36,7 +45,6 @@ Route::post('/add-to-cart/{id}', [MerchController::class, 'addToCart'])->name('a
 Route::post('/clear-cart', [MerchController::class, 'clearCart'])->name('clear-cart');
 Route::get('/search', [MerchController::class, 'search'])->name('search.items');
 
-use App\Http\Controllers\ChatController;
 Route::get('/Contacts', function () {
     return view('Contacts');
 });
@@ -47,13 +55,15 @@ Route::post('/delete-message/{id}', [ChatController::class, 'deleteMessage']);
 
 Route::post('/create-checkout-session', [StripePaymentController::class, 'createSession'])->name('create-checkout-session');
 Route::get('/checkout/success', function() {
-    // Handle successful checkout here
     return view('checkout.success');  
 })->name('checkout.success');
 Route::get('/checkout/cancel', function() {
-    // Handle checkout cancellation here
     return view('checkout.cancel');  
 })->name('checkout.cancel');
+
+Route::get('/generate-image', [ImageGeneratorController::class, 'showForm'])->name('image.form');
+Route::post('/generate-image', [ImageGeneratorController::class, 'generateImage'])->name('generate.image');
+
 
 
 
