@@ -46,14 +46,20 @@
             width: 100%;
             height: auto;
             display: block;
+            border-radius: 10px;
         }
 
         h1{
-            font-size: 40px !important;
+            font-size: 50px !important;
         }
 
         h1, p {
             color: #fff;
+            margin-bottom: 4px !important;
+        }
+
+        p{
+            font-size: 14px !important;
         }
 
         #button, #checkout-button{
@@ -72,7 +78,7 @@
         }
 
         .price {
-            font-size: 24px;
+            font-size: 35px!important;
             color: #ba0000;
         }
 

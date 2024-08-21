@@ -59,7 +59,10 @@
                     <!-- Logo can go here -->
                 </div>
                 <div class="flex items-center space-x-5 ml-10 search-container">
-                    <input type="text" placeholder="Search..." class="search-input px-4 py-1 rounded-md">
+                <form action="{{ url('/search') }}" method="GET" style="display: flex; flex-grow: 1;">
+                    <input type="text" name="query" placeholder="Search items..." class="search-input px-4 py-1 rounded-md" style="flex-grow: 1;">
+                    <button type="submit" class="icon-link"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
                     <a href="https://youtube.com" class="icon-link"><i class="fab fa-youtube"></i></a>
                     <a href="https://instagram.com" class="icon-link"><i class="fab fa-instagram"></i></a>
                     <a href="https://discord.com" class="icon-link"><i class="fab fa-discord"></i></a>
@@ -81,7 +84,7 @@
                     <a href="/add to cart" class="icon-link"><i class="fas fa-shopping-cart"></i></a>
                 @endif
                 <a href="/New Player Guide" class="icon-link {{ request()->is('New Player Guide') ? 'active-link' : '' }}"><i class="fas fa-info-circle"></i></a>
-                <a href="/Play" class="icon-link {{ request()->is('Play') ? 'active-link' : '' }}" ><i class="fas fa-play"></i></a>
+                <a href="/external-project" class="icon-link {{ request()->is('Play') ? 'active-link' : '' }}" ><i class="fas fa-play"></i></a>
                 <a href="/Contacts" class="icon-link {{ request()->is('Contacts') ? 'active-link' : '' }}"><i class="fa-solid fa-message"></i></a>
             @endif
 

@@ -15,8 +15,8 @@ Route::get('/New Player Guide', function () {
     return view('New Player Guide');
 });
 
-Route::get('/Play', function () {
-    return view('Play');
+Route::get('/external-project', function() {
+    return redirect()->away('http://text-base-rpg.local/1.The_Quest_for_the_Eternal_Flame.php');
 });
 
 Route::get('/add to cart', function () {
@@ -34,7 +34,7 @@ Route::get('/Market Place', [MerchController::class, 'index']) ->name('Market Pl
 Route::get('/Market Place/{id}', [MerchController::class, 'show'])->name('Details');
 Route::post('/add-to-cart/{id}', [MerchController::class, 'addToCart'])->name('add to cart');
 Route::post('/clear-cart', [MerchController::class, 'clearCart'])->name('clear-cart');
-
+Route::get('/search', [MerchController::class, 'search'])->name('search.items');
 
 use App\Http\Controllers\ChatController;
 Route::get('/Contacts', function () {

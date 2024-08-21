@@ -23,10 +23,10 @@
 
         form {
             background-color: rgba(255, 255, 255, 0.1); /* Transparent background for the form */
-            padding: 20px;
+            padding: 40px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            width: 300px;
+            width: 350px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
         }
 
@@ -36,6 +36,11 @@
 
         label {
             display: block;
+        }
+
+        h1{
+            margin-bottom: 10px;
+            text-align: center;
         }
 
         input[type="text"],
@@ -69,6 +74,11 @@
             text-align: center;
             margin-top: 10px;
         }
+
+        .register-link a {
+           text-decoration: none;
+        }
+
     </style>
 </head>
 
@@ -89,7 +99,7 @@
             <button type="submit">Login</button>
         </div>
         <div class="register-link">
-            <a href="/register" style="color: #FFFFFF;">Don't have an account? Register here.</a>
+            <a id = "register-link-a" href="/register" style="color: #FFFFFF;">Don't have an account? <section style="font-weight: bold";>Register here.</section></a>
         </div>
     </form>
 </body>

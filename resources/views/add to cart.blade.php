@@ -31,12 +31,20 @@
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
             width: 100%;
-            max-width: 1200px;
+            max-width: 800px;
             margin: 20px auto;
+        }
+
+        img {
+            width: 140px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
         }
 
         .details-section {
             width: 100%;
+            max-width: 700px;
             margin-bottom: 20px;
             text-align: center;
             padding: 10px;
@@ -51,6 +59,12 @@
         h1 {
             font-size: 36px !important;
             margin-bottom: 20px;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center; /* Center buttons horizontally */
+            gap: 20px; /* Space between buttons */
         }
 
         #checkout-button, #clear-cart-button {
@@ -83,14 +97,17 @@
     @if(session('cart'))
         @foreach(session('cart') as $id => $details)
             <div class="details-section">
+                <img src="{{ $details['image'] }}" alt="{{ $details['name'] }}">
                 <h2>{{ $details['name'] }}</h2>
                 <p class="price">${{ number_format($details['price']) }}</p>
                 <p>Quantity: {{ $details['quantity'] }}</p>
                 <p>Total: ${{ number_format($details['price'] * $details['quantity'], 2) }}</p>
             </div>
         @endforeach
-        <button id="checkout-button">Checkout</button>
-        <button id="clear-cart-button">Clear Cart</button>
+        <div class="button-container">
+            <button id="checkout-button">Checkout</button>
+            <button id="clear-cart-button">Clear Cart</button>
+        </div>
     @else
         <p>Your cart is empty.</p>
     @endif

@@ -23,10 +23,10 @@
 
         form {
             background-color: rgba(255, 255, 255, 0.1); /* Transparent background for the form */
-            padding: 20px;
+            padding: 40px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            width: 300px;
+            width: 350px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
         }
 
@@ -64,6 +64,15 @@
         button:hover {
             background-color: #0056b3;
         }
+
+        h1{
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .login-link {
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -91,7 +100,7 @@
             <button type="submit">Register</button>
         </div>
         <div class="login-link">
-            <a href="/login" style="color: #FFFFFF;">Already have an account? Login here.</a>
+            <a href="/login" style="color: #FFFFFF; text-decoration: none;">Already have an account? <section style="font-weight: bold;">Login here.</section></a>
         </div>
     </form>
 </body>

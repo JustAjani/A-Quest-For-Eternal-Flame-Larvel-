@@ -35,6 +35,7 @@ class MerchController extends Controller
         $cart[$id]['quantity']++;
     } else {
         $cart[$id] = [
+            "image" => $item->image,
             "name" => $item->title,
             "price" => $item->price,
             "quantity" => 1
@@ -47,10 +48,26 @@ class MerchController extends Controller
     return redirect()->back()->with('success', 'Product added to cart successfully!')
               ->header('Cache-Control', 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
 
-}
+    }
     public function clearCart()
     {
         session()->forget('cart');
         return redirect()->back()->with('success', 'Cart has been cleared!');
     }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $items = MerchItem::where('title', 'LIKE', '%' . $query . '%')->get();
+
+        // If only one item is found, redirect to its details page
+        if ($items->count() == 1) {
+            $singleItemId = $items->first()->id;
+            return redirect()->route('Details', ['id' => $singleItemId]);
+        }
+
+        // Continue to the search results page if more than one or no items are found
+        return view('marketplace-search', compact('items', 'query'));
+    }
+
 }
